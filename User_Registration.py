@@ -38,13 +38,13 @@ def get_valid_name(prompt):
     '''
     
     attempts = 1
+    
     while attempts <= 3:
         name = input(prompt)
         if check_name_format(name):
-            print("Name is Valid")
             return name
+        
         else:
-            print("Invalid Name")
             print(f'{attempts} out of 3 attempts used.')
             attempts += 1
 
@@ -54,7 +54,6 @@ def main():
     first_name = get_valid_name("Enter your First name (First letter Capital): ")
     
     if first_name:
-        logger_init(first_name).info("Registration successfull!!")
         last_name = get_valid_name("Enter your Last name (First letter Capital): ")
         
         if last_name:

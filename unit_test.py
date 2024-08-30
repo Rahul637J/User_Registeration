@@ -112,8 +112,12 @@ class ValidatingUserCredentials(unittest.TestCase):
         
         self.assertTrue(check_password_format("abc123fet"),"should be valid")
         self.assertTrue(check_password_format("12345678"),"should be valid")
+        self.assertTrue(check_password_format("Abcg1235er"),"should be valid")
+        self.assertTrue(check_password_format("dagJ452"),"should be valid")
         self.assertFalse(check_password_format("12345"),"should not be valid because not having 8 characters")
-        self.assertFalse(check_password_format("a2b"),"should not be valid because invalid length")    
+        self.assertFalse(check_password_format("a2b14see"),"should not be valid because invalid length")    
+        self.assertFalse(check_password_format("a2bfafe46"),"should not be valid because it does not contain Upper case")    
+        self.assertFalse(check_password_format("a2b565fae"),"should not be valid because it does not contain upper case")    
         
 def main():
     obj=ValidatingUserCredentials

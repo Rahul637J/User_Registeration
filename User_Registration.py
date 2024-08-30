@@ -64,7 +64,7 @@ def check_password_format(password):
     '''
     Description: 
         The function checks if the given password follows the specified format, 
-        where the format is atleast 8 characters .
+        where the format is atleast 8 characters and atleast 1 upper case.
     Parameters:
         name (str): The name to be checked.
     Return:
@@ -72,7 +72,7 @@ def check_password_format(password):
         the format, or None if it doesn't.
     '''
     
-    pattern="[A-za-z0-9]{8,}"
+    pattern="^(?=.*[A-Z])[a-zA-Z0-9]{8,}$"
     return re.fullmatch(pattern,password)
 
 def get_valid_name(prompt):

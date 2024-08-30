@@ -110,12 +110,12 @@ class ValidatingUserCredentials(unittest.TestCase):
             None
         '''
         
-        self.assertTrue(check_password_format("Abc4657bge"),"should be valid")
-        self.assertTrue(check_password_format("12345Hkaju"),"should be valid")
-        self.assertTrue(check_password_format("Abcg1235er"),"should be valid")
-        self.assertFalse(check_password_format("12345"),"should not be valid because not having 8 characters")
-        self.assertFalse(check_password_format("a2b14see"),"should not be valid because invalid length")    
-        self.assertFalse(check_password_format("a2bfafe46"),"should not be valid because it does not contain Upper case")    
+        self.assertTrue(check_password_format("Abc4@657bge"),"should be valid")
+        self.assertTrue(check_password_format("R@hul637"),"should be valid")
+        self.assertTrue(check_password_format("12345@Rah"),"should be valid")
+        self.assertFalse(check_password_format("R@h*l15"),"should not be valid because not having 8 characters and has multiple special character")
+        self.assertFalse(check_password_format("@#$Rahul637"),"should not be valid because it has multiple special character")    
+        self.assertFalse(check_password_format("R@#ul6347"),"should not be valid because it has multiple special character")    
         
 def main():
     obj=ValidatingUserCredentials

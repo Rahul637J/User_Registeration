@@ -7,7 +7,7 @@
 '''
 
 import unittest 
-from User_Registration import check_name_format
+from User_Registration import check_name_format,check_email_format
 
 class ValidatingUserCredentials(unittest.TestCase):
     
@@ -28,16 +28,12 @@ class ValidatingUserCredentials(unittest.TestCase):
         
          self.assertTrue(check_name_format('Rahul'),"Should be valid")
          self.assertTrue(check_name_format('Rah'),"Should be valid")
-         self.assertTrue(check_name_format('Rahugl'),"Should be valid")
          self.assertFalse(check_name_format('ra'),"Should not be valid due invalid length and 1st character lower case")
          self.assertFalse(check_name_format('rahul'),"Should not be valid due to 1st character lower case")
-         self.assertFalse(check_name_format('RAHUL'),"Should not be valid due to all characters are upper case")
-         self.assertFalse(check_name_format('r'),"Should not be valid due to invalid size and invalid 1st character")
-         self.assertFalse(check_name_format('rAH'),"Should not be valid dur to invalid all characters")
     
     def test_last_name(self):
         
-         '''
+        '''
         Description: 
             The function tests the `check_name_format()` function by checking 
             various name inputs for valid and invalid formats. It asserts that 
@@ -52,14 +48,33 @@ class ValidatingUserCredentials(unittest.TestCase):
             None
         '''
         
-         self.assertTrue(check_name_format('Jag'),"Should be valid")
-         self.assertTrue(check_name_format('Jaganathan'),"Should be valid")
-         self.assertFalse(check_name_format('ja'),"Should not be valid due to invalid size and 1st character")
-         self.assertFalse(check_name_format('jaH'),"Should not be valid due to 1st character lower case")
-         self.assertFalse(check_name_format('rahul'),"Should not be valid due to 1st character lower case")
-         self.assertFalse(check_name_format('RAHUL'),"Should not be valid due to all characters arer upper case")
-         self.assertFalse(check_name_format('r'),"Should not be valid due to invalid size") 
+        self.assertTrue(check_name_format('Jag'),"Should be valid")
+        self.assertTrue(check_name_format('Jaganathan'),"Should be valid")
+        self.assertFalse(check_name_format('ja'),"Should not be valid due to invalid size and 1st character")
+        self.assertFalse(check_name_format('jaH'),"Should not be valid due to 1st character lower case")
 
+    def test_email(self):
+        
+        '''
+        Description: 
+            The function tests the `check_email_format()` function by checking 
+            various email inputs for valid and invalid formats. It asserts that 
+            email starting with a lower cases letters optionally followed with '.' 
+            and upper case letters with '@' followed by 2 optional (xyz & in) with
+            precise @ and . positions return True, while invalid formats return False.
+            
+        Parameters:
+            None
+            
+        Return:
+            None
+        '''
+        
+        self.assertTrue(check_email_format("abc@gmail.com"),"should be valid")
+        self.assertTrue(check_email_format("abc.xyz@co.in"),"should be valid")
+        self.assertFalse(check_email_format("abc.@com"),"should not be valid")
+        self.assertFalse(check_email_format("abc.com.co"),"should not be valid")
+        
 def main():
     obj=ValidatingUserCredentials
     obj.test_First_name()

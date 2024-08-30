@@ -43,6 +43,23 @@ def check_email_format(email):
     pattern=r"^[A-Za-z0-9]+(?:\.[A-Za-z0-9]+)?@[A-Za-z0-9]+\.[A-Za-z]{2,}(?:\.[A-Za-z]{2,})?$"
     return re.match(pattern,email)
 
+def check_phone_number_format(phone_number):
+    
+    '''
+    Description: 
+        The function checks if the given name follows the specified format, 
+        where the first character must be an uppercase letter followed by at 
+        least two lowercase letters.
+    Parameters:
+        name (str): The name to be checked.
+    Return:
+        re.Match object or None: Returns a match object if the name follows 
+        the format, or None if it doesn't.
+    '''
+    
+    pattern="^[0-9]{2} [0-9]{10}$"
+    return re.fullmatch(pattern,phone_number)
+
 def get_valid_name(prompt):
     
     '''
@@ -91,7 +108,31 @@ def get_valid_email(msg):
         else:
             print(f'{attempts} out of 3 attempts used.')
             attempts+=1
-            
+
+def get_valid_phone_number(msg):
+    
+    '''
+    Description: 
+        Prompts the user to input a name and validates it using the check_name_format 
+        function. The user gets up to 3 attempts to input a valid name.
+    Parameters:
+        prompt (str): The input prompt message for the user.
+    Return:
+        none
+    '''
+    
+    attempts=1
+    
+    while attempts<=3:
+        phone_number=input(msg)
+        
+        if check_phone_number_format(phone_number):
+            return phone_number
+        
+        else:
+            print(f'{attempts} out of 3 attempts used.')
+            attempts+=1
+                
 def main():
     first_name = get_valid_name("Enter your First name (First letter Capital): ")
     
@@ -99,10 +140,17 @@ def main():
         last_name = get_valid_name("Enter your Last name (First letter Capital): ")
     
         if last_name:
-            email=get_valid_email("Enter the valid email: ")
+            email=get_valid_email("Enter the email: ")
+            print(email)
             
-            if email:
-                logger_init(email).info("User registered successfull!!")
+            if email!= None:
+                phone_number=check_phone_number_format("Enter your phone number: ")
+
+                if phone_number:
+                  logger_init(phone_number).info("User Registration successful!!!")    
+                
+                else:
+                    logger_init(phone_number).warning("Registration Expired, Register again!!!")      
             
             else:
                 logger_init(email).warning("Registration expired, Register again!!!")    

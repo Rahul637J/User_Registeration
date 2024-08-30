@@ -115,7 +115,7 @@ class ValidatingUserCredentials(unittest.TestCase):
         self.assertTrue(check_password_format("12345@Rah"),"should be valid")
         self.assertFalse(check_password_format("R@h*l15"),"should not be valid because not having 8 characters and has multiple special character")
         self.assertFalse(check_password_format("@#$Rahul637"),"should not be valid because it has multiple special character")    
-        self.assertFalse(check_password_format("R@#ul6347"),"should not be valid because it has multiple special character")    
+        self.assertFalse(check_password_format("R@#ul6347"),"should not be valid because it has multiple special character")  
         
 def main():
     obj=ValidatingUserCredentials

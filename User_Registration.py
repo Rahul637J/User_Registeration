@@ -7,6 +7,8 @@
 '''
 
 import re 
+from MyLogging import logger_init
+
 
 def check_name_format(name):
     '''
@@ -46,21 +48,21 @@ def get_valid_name(prompt):
             print(f'{attempts} out of 3 attempts used.')
             attempts += 1
 
-    print("Registration Expired. Start a new registration!")
     return None
 
 def main():
     first_name = get_valid_name("Enter your First name (First letter Capital): ")
     
     if first_name:
+        logger_init(first_name).info("Registration successfull!!")
         last_name = get_valid_name("Enter your Last name (First letter Capital): ")
         
         if last_name:
-            print(f"Registration Successful: {first_name} {last_name}")
+            logger_init(last_name).info("User Registered successfully")
         else:
-            print("Last name validation failed. Registration incomplete.")
+            logger_init(last_name).warning("User Registration Expired")
     else:
-        print("First name validation failed. Registration incomplete.")
+        logger_init(first_name).warning("First name invalid, Registration failed")
 
 if __name__ == "__main__":
     main()

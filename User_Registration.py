@@ -141,16 +141,15 @@ def main():
     
         if last_name:
             email=get_valid_email("Enter the email: ")
-            print(email)
             
-            if email!= None:
-                phone_number=check_phone_number_format("Enter your phone number: ")
+            if email:
+                phone_number=get_valid_phone_number("Enter your phone number: ")
 
                 if phone_number:
                   logger_init(phone_number).info("User Registration successful!!!")    
                 
                 else:
-                    logger_init(phone_number).warning("Registration Expired, Register again!!!")      
+                    logger_init(phone_number).warning("Registration Expired, Register again!!!") 
             
             else:
                 logger_init(email).warning("Registration expired, Register again!!!")    

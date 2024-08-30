@@ -7,7 +7,7 @@
 '''
 
 import unittest 
-from User_Registration import check_name_format,check_email_format,check_phone_number_format
+from User_Registration import check_name_format,check_email_format,check_phone_number_format,check_password_format
 
 class ValidatingUserCredentials(unittest.TestCase):
     
@@ -94,6 +94,26 @@ class ValidatingUserCredentials(unittest.TestCase):
         self.assertTrue(check_phone_number_format("65 1234567890"),"should be valid")
         self.assertFalse(check_phone_number_format("1234567890"),"should not be valid because not having country code")
         self.assertFalse(check_phone_number_format("91 567890"),"should not be valid because invalid length")
+    
+    def test_password_number(self):
+        
+        '''
+        Description: 
+            The function tests the `check_password_format()` function by checking 
+            various password inputs for valid and invalid formats. return True, while 
+            sinvalid formats return False.
+            
+        Parameters:
+            None
+            
+        Return:
+            None
+        '''
+        
+        self.assertTrue(check_password_format("abc123fet"),"should be valid")
+        self.assertTrue(check_password_format("12345678"),"should be valid")
+        self.assertFalse(check_password_format("12345"),"should not be valid because not having 8 characters")
+        self.assertFalse(check_password_format("a2b"),"should not be valid because invalid length")    
         
 def main():
     obj=ValidatingUserCredentials

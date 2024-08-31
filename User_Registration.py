@@ -3,208 +3,147 @@
 @Date: 2024-08-29
 @Last Modified by: Rahul 
 @Last Modified time: 2024-08-29
-@Title: Employee wages - Python program to validate user input for registration
+@Title: Employee Registration - Python program to validate user input for registration
 '''
 
 import re 
 from MyLogging import logger_init
 
+logger = logger_init("UC_5")
+
+def validate_input(prompt, validation_function, error_message):
+    
+    '''
+    Description: 
+        Prompts the user for input and validates it using the provided validation function.
+        The user gets up to 3 attempts to provide valid input.
+    Parameters:
+        prompt (str): The message displayed to the user for input.
+        validation_function (callable): A function that validates the input.
+        error_message (str): The error message displayed if validation fails.
+    Return:
+        str or None: Returns the valid input if successful, otherwise None if validation fails after 3 attempts.
+    '''
+    
+    attempts = 1
+    while attempts <= 3:
+        user_input = input(prompt)
+        if validation_function(user_input):
+            return user_input
+        else:
+            print(f'{error_message} {attempts} out of 3 attempts used.')
+            attempts += 1
+    return None
+
 def check_name_format(name):
     
     '''
     Description: 
-        The function checks if the given name follows the specified format, 
-        where the first character must be an uppercase letter followed by at 
-        least two lowercase letters.
+        Checks if the name follows the format of starting with a capital letter followed by at least two lowercase letters.
     Parameters:
-        name (str): The name to be checked.
+        name (str): The name to validate.
     Return:
-        re.Match object or None: Returns a match object if the name follows 
-        the format, or None if it doesn't.
+        bool: True if the name is valid, False otherwise.
     '''
     
-    pattern = "^[A-Z][a-z]{2,}"
-    return re.fullmatch(pattern, name)
+    pattern = "^[A-Z][a-z]{2,}$"
+    return bool(re.fullmatch(pattern, name))
 
 def check_email_format(email):
     
     '''
     Description: 
-        The function checks if the given name follows the specified format, 
-        where the first character must be an uppercase letter followed by at 
-        least two lowercase letters.
+        Checks if the email follows a valid email format.
     Parameters:
-        name (str): The name to be checked.
+        email (str): The email to validate.
     Return:
-        re.Match object or None: Returns a match object if the name follows 
-        the format, or None if it doesn't.
+        bool: True if the email is valid, False otherwise.
     '''
     
-    pattern=r"^[A-Za-z0-9]+(?:\.[A-Za-z0-9]+)?@[A-Za-z0-9]+\.[A-Za-z]{2,}(?:\.[A-Za-z]{2,})?$"
-    return re.match(pattern,email)
+    pattern = r"^[A-Za-z0-9]+(?:\.[A-Za-z0-9]+)?@[A-Za-z0-9]+\.[A-Za-z]{2,}(?:\.[A-Za-z]{2,})?$"
+    return bool(re.fullmatch(pattern, email))
 
 def check_phone_number_format(phone_number):
     
     '''
     Description: 
-        The function checks if the given phone number follows the specified format, 
-        where the format start's with contry code followed by space and 10 digits.
+        Checks if the phone number follows the format: country code followed by space and a 10-digit number.
     Parameters:
-        name (str): The name to be checked.
+        phone_number (str): The phone number to validate.
     Return:
-        re.Match object or None: Returns a match object if the name follows 
-        the format, or None if it doesn't.
+        bool: True if the phone number is valid, False otherwise.
     '''
     
-    pattern="^[0-9]{2} [0-9]{10}$"
-    return re.fullmatch(pattern,phone_number)
+    pattern = "^[0-9]{2} [0-9]{10}$"
+    return bool(re.fullmatch(pattern, phone_number))
 
 def check_password_format(password):
     
     '''
     Description: 
-        The function checks if the given password follows the specified format, 
-        where the format is atleast 8 characters and atleast 1 upper case.
+        Checks if the password is at least 8 characters long.
     Parameters:
-        name (str): The name to be checked.
+        password (str): The password to validate.
     Return:
-        re.Match object or None: Returns a match object if the name follows 
-        the format, or None if it doesn't.
+        bool: True if the password is valid, False otherwise.
     '''
     
-    pattern = "^(?=.*[A-Z])(?=.*[0-9])(?=[^@#$%^&+=]*[@#$%^&+=][^@#$%^&+=]*$)[A-Za-z0-9@#$%^&+=]{8,}$"
-    return re.fullmatch(pattern,password)
+    pattern = r"^(?=.*[A-Z])(?=.*[0-9])(?=[^@#$%^&+=]*[@#$%^&+=][^@#$%^&+=]*$)[A-Za-z0-9@#$%^&+=]{8,}$"
+    return bool(re.fullmatch(pattern, password))
 
-def get_valid_name(prompt):
-    
-    '''
-    Description: 
-        Prompts the user to input a name and validates it using the check_name_format 
-        function. The user gets up to 3 attempts to input a valid name.
-    Parameters:
-        prompt (str): The input prompt message for the user.
-    Return:
-        str or None: Returns the valid name if successful, otherwise None if validation fails after 3 attempts.
-    '''
-    
-    attempts = 1
-    
-    while attempts <= 3:
-        name = input(prompt)
-        if check_name_format(name):
-            return name
-        
-        else:
-            print(f'{attempts} out of 3 attempts used.')
-            attempts += 1
-
-    return None
-
-def get_valid_email(msg):
-    
-    '''
-    Description: 
-        Prompts the user to input a email and validates it using the check_eamil_format 
-        function. The user gets up to 3 attempts to input a valid name.
-    Parameters:
-        prompt (str): The input prompt message for the user.
-    Return:
-        str or None: Returns the valid name if successful, otherwise None if validation fails after 3 attempts.
-    '''
-    
-    attempts=1
-    
-    while attempts<=3:
-        email=input(msg)
-        
-        if check_email_format(email):
-            return email
-        
-        else:
-            print(f'{attempts} out of 3 attempts used.')
-            attempts+=1
-
-def get_valid_phone_number(msg):
-    
-    '''
-    Description: 
-        Prompts the user to input a phone number and validates it using the check_phone_number_format 
-        function. The user gets up to 3 attempts to input a valid name.
-    Parameters:
-        prompt (str): The input prompt message for the user.
-    Return:
-        none
-    '''
-    
-    attempts=1
-    
-    while attempts<=3:
-        phone_number=input(msg)
-        
-        if check_phone_number_format(phone_number):
-            return phone_number
-        
-        else:
-            print(f'{attempts} out of 3 attempts used.')
-            attempts+=1
-
-def get_valid_password(msg):
-    
-    '''
-    Description: 
-        Prompts the user to input a name and validates it using the check_name_format 
-        function. The user gets up to 3 attempts to input a valid name.
-    Parameters:
-        prompt (str): The input prompt message for the user.
-    Return:
-        none
-    '''
-    
-    attempts=1
-    
-    while attempts<=3:
-        password=input(msg)
-        
-        if check_password_format(password):
-            return password
-        
-        else:
-            print(f'{attempts} out of 3 attempts used.')
-            attempts+=1
-                
-                
 def main():
-    first_name = get_valid_name("Enter your First name (First letter Capital): ")
     
-    if first_name:
-        last_name = get_valid_name("Enter your Last name (First letter Capital): ")
+    first_name = validate_input(
+        "Enter your First name (Eg - 'Rahul'): ",
+        check_name_format,
+        "Invalid first name."
+    )
     
-        if last_name:
-            email=get_valid_email("Enter the email: ")
-            
-            if email:
-                phone_number=get_valid_phone_number("Enter your phone number: ")
+    if not first_name:
+        logger.warning("First name invalid, Registration failed")
+        return
 
-                if phone_number:
-                    password=get_valid_password("Enter the password (minimum 8 characters): ")
-                    
-                    if password:
-                        logger_init(password).info("User registered successfull!!")
-                    
-                    else:
-                        logger_init(password).warning("Session expired, Register again!!!")    
-                
-                else:
-                    logger_init(phone_number).warning("Session Expired, Register again!!!") 
-            
-            else:
-                logger_init(email).warning("Session expired, Register again!!!")    
-        
-        else:
-            logger_init(last_name).warning("Session expired, Register again!!!")
-                 
-    else:
-        logger_init(first_name).warning("Session expired, Registration failed")
+    last_name = validate_input(
+        "Enter your Last name (Eg - 'Jaganathan'): ",
+        check_name_format,
+        "Invalid last name."
+    )
     
+    if not last_name:
+        logger.warning("Last name invalid, Registration failed")
+        return
+
+    email = validate_input(
+        "Enter your email (Eg - 'rahul637j@gmail.com'): ",
+        check_email_format,
+        "Invalid email."
+    )
+    
+    if not email:
+        logger.warning("Invalid email, Registration failed")
+        return
+
+    phone_number = validate_input(
+        "Enter your phone number (e.g., 91 1234567890): ",
+        check_phone_number_format,
+        "Invalid phone number."
+    )
+    
+    if not phone_number:
+        logger.warning("Invalid phone number, Registration failed")
+        return
+
+    password = validate_input(
+        "Enter your password (minimum 8 characters): ",
+        check_password_format,
+        "Invalid password."
+    )
+    
+    if not password:
+        logger.warning("Invalid password, Registration failed")
+        return
+
+    logger.info(f'Hi {first_name} {last_name}, you have registered successfully!!!')
+
 if __name__ == "__main__":
     main()

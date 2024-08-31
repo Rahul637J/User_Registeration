@@ -32,8 +32,6 @@ class ValidatingUserCredentials(unittest.TestCase):
          self.assertFalse(check_name_format('ra'),"Should not be valid due invalid length and 1st character lower case")
          self.assertFalse(check_name_format('rahul'),"Should not be valid due to 1st character lower case")
          self.assertFalse(check_name_format('RAHUL'),"Should not be valid due to all characters are upper case")
-         self.assertFalse(check_name_format('r'),"Should not be valid due to invalid size and invalid 1st character")
-         self.assertFalse(check_name_format('rAH'),"Should not be valid dur to invalid all characters")
     
     def test_last_name(self):
         

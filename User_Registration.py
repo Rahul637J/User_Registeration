@@ -51,17 +51,17 @@ def get_valid_name(prompt):
     return None
 
 def main():
-    first_name = get_valid_name("Enter your First name (First letter Capital): ")
+    first_name = get_valid_name("Enter your First name (Eg- 'Rah'): ")
     
     if first_name:
-        last_name = get_valid_name("Enter your Last name (First letter Capital): ")
+        last_name = get_valid_name("Enter your Last name (Eg- 'Jag'): ")
         
         if last_name:
-            logger_init(last_name).info("User Registered successfully")
+            logger_init("UC_2").info("User Registered successfully")
         else:
-            logger_init(last_name).warning("User Registration Expired")
+            logger_init("UC_2").warning("User Registration Expired")
     else:
-        logger_init(first_name).warning("First name invalid, Registration failed")
+        logger_init('UC_2').warning("First name invalid, Registration failed")
 
 if __name__ == "__main__":
     main()

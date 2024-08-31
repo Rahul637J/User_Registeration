@@ -70,10 +70,30 @@ class ValidatingUserCredentials(unittest.TestCase):
             None
         '''
         
-        self.assertTrue(check_email_format("abc@gmail.com"),"should be valid")
-        self.assertTrue(check_email_format("abc.xyz@co.in"),"should be valid")
+        # * Valid Test cases
+        self.assertTrue(check_email_format("abc@yahoo.com"),"should be valid")
+        self.assertTrue(check_email_format("abc-100@yahoo.com"),"should be valid")
+        self.assertTrue(check_email_format("abc.100@yahoo.com"),"should be valid")
+        self.assertTrue(check_email_format("abc111@abc.com"),"should be valid")
+        self.assertTrue(check_email_format("abc111@abc.net"),"should be valid")
+        self.assertTrue(check_email_format("abc.100@abc.com.au"),"should be valid")
+        self.assertTrue(check_email_format("abc@1.com"),"should be valid")
+        self.assertTrue(check_email_format("abc@gmail.com.com"),"should be valid")
+        self.assertTrue(check_email_format("abc+100@gmail.com"),"should be valid")
+    
+        # ! Invalid Test cases
         self.assertFalse(check_email_format("abc.@com"),"should not be valid")
-        self.assertFalse(check_email_format("abc.com.co"),"should not be valid")
+        self.assertFalse(check_email_format("abc@.com.my"),"should not be valid")
+        self.assertFalse(check_email_format("abc123@gmail.a"),"should not be valid")
+        self.assertFalse(check_email_format("abc123@.com.com"),"should not be valid")
+        self.assertFalse(check_email_format(".abc@abc.com"),"should not be valid")
+        self.assertFalse(check_email_format("abc()*@gmail.com"),"should not be valid")
+        self.assertFalse(check_email_format("abc@%*.com"),"should not be valid")
+        self.assertFalse(check_email_format("abc..2002@gmail.com"),"should not be valid")
+        self.assertFalse(check_email_format("abc.@gmail.com"),"should not be valid")
+        self.assertFalse(check_email_format("aabc@abc@gmail.com"),"should not be valid")
+        self.assertFalse(check_email_format("aabc@gmail.com.1a"),"should not be valid")
+        self.assertFalse(check_email_format("abc@gmail.com.aa.au"),"should not be valid")
         
     def test_phone_number(self):
         

@@ -48,22 +48,21 @@ def get_valid_name(prompt):
             return name
         else:
             print(f'{attempts} out of 3 attempts used.')
-            attempts += 1
             name = input("Enter the valid name: ")
+            attempts += 1
 
     return None
 
 def main():
     
-    first_name=input("Enter your first name (1st character should capital): ")
+    first_name=input("Enter your first name (Eg-'Rah'): ")
     valid_name=get_valid_name(first_name)
     
     if valid_name:
-        logger_init(valid_name).info("User registration  successfull")
+        logger_init("UC_1").info("User registration successfull")
     
     else:
-        logger_init(valid_name).warning("User registration expired, Register again")    
+        logger_init("UC_1").warning("User registration expired, Register again")    
            
-        
 if __name__=="__main__":
     main()

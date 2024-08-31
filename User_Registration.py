@@ -40,7 +40,7 @@ def check_email_format(email):
         the format, or None if it doesn't.
     '''
     
-    pattern=r"^[A-Za-z0-9]+(?:\.[A-Za-z0-9]+)?@[A-Za-z0-9]+\.[A-Za-z]{2,}(?:\.[A-Za-z]{2,})?$"
+    pattern=r'^[a-z0-9A-Z]+(?:[._%+-][a-zA-Z0-9]+)*@[a-z0-9-A-Z]+\.[a-zA-Z]{2,3}(\.[a-zA-Z]{2,3})?$'
     return re.match(pattern,email)
 
 def check_phone_number_format(phone_number):
@@ -72,7 +72,7 @@ def check_password_format(password):
         the format, or None if it doesn't.
     '''
     
-    pattern = "^(?=.*[A-Z])(?=.*[0-9])(?=[^@#$%^&+=]*[@#$%^&+=][^@#$%^&+=]*$)[A-Za-z0-9@#$%^&+=]{8,}$"
+    pattern="^(?=.*[A-Z])(?=.*[0-9])(?=[^@#$%^&+=]*[@#$%^&+=][^@#$%^&+=]*$)[A-Za-z0-9@#$%^&+=]{8,}$"
     return re.fullmatch(pattern,password)
 
 def get_valid_name(prompt):
@@ -171,7 +171,6 @@ def get_valid_password(msg):
         else:
             print(f'{attempts} out of 3 attempts used.')
             attempts+=1
-                
                 
 def main():
     first_name = get_valid_name("Enter your First name (First letter Capital): ")

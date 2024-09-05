@@ -34,7 +34,7 @@ class ValidatingUserCredentials(unittest.TestCase):
          self.assertFalse(check_name_format('RAHUL'))
 
 def main():
-    obj=ValidatingUserCredentials
+    obj=ValidatingUserCredentials()
     obj.test_First_name()
     
 if __name__=="__main__":

@@ -6,10 +6,9 @@
 @Title: Employee Registration - Python program to validate user input for registration
 '''
 
-import re 
-from MyLogging import logger_init
+import re, MyLogging
 
-logger = logger_init("UC_5")
+logger = MyLogging.logger_init("UC_9")
 
 def validate_input(prompt, validation_function, error_message):
     

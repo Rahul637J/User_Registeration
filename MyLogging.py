@@ -1,3 +1,11 @@
+'''
+@Author: Rahul 
+@Date: 2024-08-29
+@Last Modified by: Rahul 
+@Last Modified time: 2024-08-29
+@Title: Employee Registration - Python program to maintain logging
+'''
+
 import logging
 
 def logger_init(name):

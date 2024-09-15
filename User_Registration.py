@@ -9,6 +9,32 @@
 import re 
 from MyLogging import logger_init
 
+log = logger_init("UC_2")
+
+def validate_input(prompt, validation_function, error_message):
+    
+    '''
+    Description: 
+        Prompts the user for input and validates it using the provided validation function.
+        The user gets up to 3 attempts to provide valid input.
+    Parameters:
+        prompt (str): The message displayed to the user for input.
+        validation_function (callable): A function that validates the input.
+        error_message (str): The error message displayed if validation fails.
+    Return:
+        str or None: Returns the valid input if successful, otherwise None if validation fails after 3 attempts.
+    '''
+    
+    attempts = 1
+    while attempts <= 3:
+        user_input = input(prompt)
+        if validation_function(user_input):
+            return user_input
+        else:
+            print(f'{error_message} {attempts} out of 3 attempts used.')
+            attempts += 1
+    return None
+
 
 def check_name_format(name):
     '''
@@ -51,17 +77,27 @@ def get_valid_name(prompt):
     return None
 
 def main():
-    first_name = get_valid_name("Enter your First name (Eg- 'Rah'): ")
+    first_name = validate_input(
+        "Enter your First name (Eg - 'Rahul'): ",
+        check_name_format,
+        "Invalid first name."
+    )
     
-    if first_name:
-        last_name = get_valid_name("Enter your Last name (Eg- 'Jag'): ")
-        
-        if last_name:
-            logger_init("UC_2").info("User Registered successfully")
-        else:
-            logger_init("UC_2").warning("User Registration Expired")
-    else:
-        logger_init('UC_2').warning("First name invalid, Registration failed")
+    if not first_name:
+        log.info("First name invalid, Registration failed")
+        return
+
+    last_name = validate_input(
+        "Enter your Last name (Eg - 'Jaganathan'): ",
+        check_name_format,
+        "Invalid last name."
+    )
+    
+    if not last_name:
+        log.info("Last name invalid, Registration failed")
+        return
+    
+    log.info("User Registered successfull!!!")
 
 if __name__ == "__main__":
     main()

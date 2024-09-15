@@ -4,10 +4,12 @@
 @Last Modified by: Rahul 
 @Last Modified time: 2024-08-29
 @Title: Employee wages - Python program to validate user input for registration
+
 '''
 
 import re
 from MyLogging import logger_init
+
 
 logger = logger_init("UC_3")
 

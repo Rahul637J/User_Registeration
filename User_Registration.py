@@ -10,6 +10,34 @@ from MyLogging import logger_init
 import re 
 
 
+log = logger_init("UC_1")
+
+def validate_input(prompt, validation_function, error_message):
+    
+    '''
+    Description: 
+        Prompts the user for input and validates it using the provided validation function.
+        The user gets up to 3 attempts to provide valid input.
+    Parameters:
+        prompt (str): The message displayed to the user for input.
+        validation_function (callable): A function that validates the input.
+        error_message (str): The error message displayed if validation fails.
+    Return:
+        str or None: Returns the valid input if successful, otherwise None if validation fails after 3 attempts.
+    '''
+    
+    attempts = 1
+    
+    while attempts <= 3:
+        user_input = input(prompt)
+        if validation_function(user_input):
+            return user_input
+        else:
+            print(f'{error_message} {attempts} out of 3 attempts used.')
+            attempts += 1
+    return None
+
+
 def check_name_format(name):
     
      '''
@@ -28,41 +56,21 @@ def check_name_format(name):
     
      pattern="^[A-Z][a-z]{2,}"
      return re.match(pattern,name)
- 
-def get_valid_name(prompt):
-    
-    '''
-    Description: 
-        Prompts the user to input a name and validates it using the check_name_format 
-        function. The user gets up to 3 attempts to input a valid name.
-    Parameters:
-        prompt (str): The input prompt message for the user.
-    Return:
-        str or None: Returns the valid name if successful, otherwise None if validation fails after 3 attempts.
-    '''
-    
-    attempts = 1
-    name=prompt
-    while attempts <= 3:
-        if check_name_format(name):
-            return name
-        else:
-            print(f'{attempts} out of 3 attempts used.')
-            name = input("Enter the valid name: ")
-            attempts += 1
-
-    return None
+  
 
 def main():
     
-    first_name=input("Enter your first name (Eg-'Rah'): ")
-    valid_name=get_valid_name(first_name)
+    first_name = validate_input(
+        "Enter your First name (Eg - 'Rahul'): ",
+        check_name_format,
+        "Invalid first name."
+    )
     
-    if valid_name:
-        logger_init("UC_1").info("User registration successfull")
+    if not first_name:
+        log.info("First name invalid, Registration failed")
+        return
     
-    else:
-        logger_init("UC_1").warning("User registration expired, Register again")    
+    log.info("Registered successfull!!!")  
            
 if __name__=="__main__":
     main()
